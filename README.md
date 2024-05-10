@@ -24,7 +24,7 @@
                 flutterproject/<br />
                   ContactFetcher.kt<br /><br />
 
-    When you create ContactFetcher.kt class then write this Kotlin code to Fetch Contact :
+ When you create ContactFetcher.kt class then write this Kotlin code to Fetch Contact :
 
       package com.example.bloc
       import androidx.annotation.NonNull
