@@ -11,7 +11,7 @@
 
 3) Now we have to write some Native code in Kotlin and then make a channel for communicate it with Flutter Code. So we'll have to do following Steps:
 
-  Here's an example of the directory structure where you might place the Kotlin file:
+  Here's an example of the directory structure where you might place the Kotlin file:<br />
 
   flutter_project/
   android/
@@ -22,7 +22,7 @@
             com/
               example/
                 flutterproject/
-                  ContactFetcher.kt
+                  ContactFetcher.kt<br />
 
     When you create ContactFetcher.kt class then write this Kotlin code to Fetch Contact :
 
