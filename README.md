@@ -2,9 +2,9 @@
 
 # Android:
 
-1) Add permisson handling dependency for permisson of contact
+1) Add permisson handling dependency for permisson of contact<br />
 
-2) Add these permission in you AndroidManifest.xml file:
+2) Add these permission in you AndroidManifest.xml file:<br />
 
        <uses-permission android:name="android.permission.READ_CONTACTS" />
        <uses-permission android:name="android.permission.WRITE_CONTACTS" />
@@ -85,11 +85,11 @@
             }
         }
 
-return phoneNumber
+      return phoneNumber
     }
-}
+      }
 
-class MyPlugin : FlutterPlugin {
+      class MyPlugin : FlutterPlugin {
     override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
         val channel = MethodChannel(flutterPluginBinding.binaryMessenger, "contact_service")
         channel.setMethodCallHandler { call, result ->
@@ -101,30 +101,30 @@ class MyPlugin : FlutterPlugin {
         }
     }
 
-override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
+      override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
         // Clean up resources if needed
     }
-}
+      }
 
 then in your MainActivity.kt file which is just below contactFetcher.kt file and this file will be there from flutter you don't need to create. paste the following code in that class
 
- package com.example.bloc
+       package com.example.bloc
 
-import android.content.ContentResolver
-import android.content.Context
-import android.provider.ContactsContract
-import io.flutter.embedding.android.FlutterActivity
-import io.flutter.embedding.engine.FlutterEngine
-import io.flutter.plugin.common.MethodCall
-import io.flutter.plugin.common.MethodChannel
+      import android.content.ContentResolver
+      import android.content.Context
+      import android.provider.ContactsContract
+      import io.flutter.embedding.android.FlutterActivity
+      import io.flutter.embedding.engine.FlutterEngine
+      import io.flutter.plugin.common.MethodCall
+      import io.flutter.plugin.common.MethodChannel
 
-class MainActivity: FlutterActivity() {
+      class MainActivity: FlutterActivity() {
     private val CHANNEL = "contact_service"
 
- override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
+       override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
 
-  MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL).setMethodCallHandler { call, result ->
+        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL).setMethodCallHandler { call,       result ->
             if (call.method == "fetchContacts") {
                 fetchContacts(result)
             } else {
@@ -133,7 +133,7 @@ class MainActivity: FlutterActivity() {
         }
     }
 
-private fun fetchContacts(result: MethodChannel.Result) {
+      private fun fetchContacts(result: MethodChannel.Result) {
         val contactsList = mutableListOf<Map<String, String>>()
         val contentResolver: ContentResolver = applicationContext.contentResolver
         val cursor = contentResolver.query(
@@ -144,7 +144,7 @@ private fun fetchContacts(result: MethodChannel.Result) {
             null
         )
 
- cursor?.use { cursor ->
+       cursor?.use { cursor ->
             if (cursor.moveToFirst()) {
                 do {
                     val contactId =
@@ -161,10 +161,10 @@ private fun fetchContacts(result: MethodChannel.Result) {
             }
         }
 
-result.success(contactsList)
+      result.success(contactsList)
     }
 
-private fun fetchContactPhoneNumber(contactId: String): String {
+      private fun fetchContactPhoneNumber(contactId: String): String {
         var phoneNumber = ""
         val contentResolver: ContentResolver = applicationContext.contentResolver
         val cursor = contentResolver.query(
@@ -175,7 +175,7 @@ private fun fetchContactPhoneNumber(contactId: String): String {
             null
         )
 
- cursor?.use { cursor ->
+       cursor?.use { cursor ->
             if (cursor.moveToFirst()) {
                 phoneNumber = cursor.getString(
                     cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)
@@ -184,7 +184,7 @@ private fun fetchContactPhoneNumber(contactId: String): String {
         }
         return phoneNumber
     }
-}
+      }
 
 
 your done with android portion . now all the UI portion and logic i have written in Flutter check out that and once you hot restart the add it will ask for permission and then it'll fetch all your phone numbers without dependency.
