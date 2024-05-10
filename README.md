@@ -47,7 +47,6 @@ class ContactFetcher(private val context: Context) {
             null,
             null
         )
-
         cursor?.use { cursor ->
             if (cursor.moveToFirst()) {
                 do {
@@ -64,11 +63,10 @@ class ContactFetcher(private val context: Context) {
                 } while (cursor.moveToNext())
             }
         }
-
         result.success(contactsList)
     }
 
-    private fun fetchContactPhoneNumber(contactId: String): String {
+private fun fetchContactPhoneNumber(contactId: String): String {
         var phoneNumber = ""
         val contentResolver: ContentResolver = context.contentResolver
         val cursor = contentResolver.query(
@@ -79,7 +77,7 @@ class ContactFetcher(private val context: Context) {
             null
         )
 
-        cursor?.use { cursor ->
+ cursor?.use { cursor ->
             if (cursor.moveToFirst()) {
                 phoneNumber = cursor.getString(
                     cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)
@@ -87,7 +85,7 @@ class ContactFetcher(private val context: Context) {
             }
         }
 
-        return phoneNumber
+return phoneNumber
     }
 }
 
@@ -103,7 +101,7 @@ class MyPlugin : FlutterPlugin {
         }
     }
 
-    override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
+override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
         // Clean up resources if needed
     }
 }
@@ -123,10 +121,10 @@ import io.flutter.plugin.common.MethodChannel
 class MainActivity: FlutterActivity() {
     private val CHANNEL = "contact_service"
 
-    override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
+ override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
 
-        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL).setMethodCallHandler { call, result ->
+  MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL).setMethodCallHandler { call, result ->
             if (call.method == "fetchContacts") {
                 fetchContacts(result)
             } else {
@@ -135,7 +133,7 @@ class MainActivity: FlutterActivity() {
         }
     }
 
-    private fun fetchContacts(result: MethodChannel.Result) {
+private fun fetchContacts(result: MethodChannel.Result) {
         val contactsList = mutableListOf<Map<String, String>>()
         val contentResolver: ContentResolver = applicationContext.contentResolver
         val cursor = contentResolver.query(
@@ -146,7 +144,7 @@ class MainActivity: FlutterActivity() {
             null
         )
 
-        cursor?.use { cursor ->
+ cursor?.use { cursor ->
             if (cursor.moveToFirst()) {
                 do {
                     val contactId =
@@ -163,10 +161,10 @@ class MainActivity: FlutterActivity() {
             }
         }
 
-        result.success(contactsList)
+result.success(contactsList)
     }
 
-    private fun fetchContactPhoneNumber(contactId: String): String {
+private fun fetchContactPhoneNumber(contactId: String): String {
         var phoneNumber = ""
         val contentResolver: ContentResolver = applicationContext.contentResolver
         val cursor = contentResolver.query(
@@ -177,14 +175,13 @@ class MainActivity: FlutterActivity() {
             null
         )
 
-        cursor?.use { cursor ->
+ cursor?.use { cursor ->
             if (cursor.moveToFirst()) {
                 phoneNumber = cursor.getString(
                     cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)
                 )
             }
         }
-
         return phoneNumber
     }
 }
