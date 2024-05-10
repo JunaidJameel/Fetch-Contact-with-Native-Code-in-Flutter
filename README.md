@@ -14,15 +14,15 @@
   Here's an example of the directory structure where you might place the Kotlin file:<br />
 
   flutter_project/
-  android/
-    app/
-      src/
-        main/
-          kotlin/
-            com/
-              example/
-                flutterproject/
-                  ContactFetcher.kt<br />
+  android/<br />
+    app/<br />
+      src/<br />
+        main/<br />
+          kotlin/<br />
+            com/<br />
+              example/<br />
+                flutterproject/<br />
+                  ContactFetcher.kt<br /><br />
 
     When you create ContactFetcher.kt class then write this Kotlin code to Fetch Contact :
 
