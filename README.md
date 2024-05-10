@@ -26,8 +26,8 @@
 
     When you create ContactFetcher.kt class then write this Kotlin code to Fetch Contact :
 
-package com.example.bloc
-import androidx.annotation.NonNull
+      package com.example.bloc
+      import androidx.annotation.NonNull
 
 import android.content.ContentResolver
 import android.content.Context
