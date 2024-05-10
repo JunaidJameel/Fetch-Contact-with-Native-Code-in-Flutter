@@ -15,7 +15,7 @@
 
   flutter_project/
   android/<br />
-    app/<br />
+ app/<br />
       src/<br />
         main/<br />
           kotlin/<br />
