@@ -6,8 +6,8 @@
 
 2) Add these permission in you AndroidManifest.xml file:
 
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+       <uses-permission android:name="android.permission.READ_CONTACTS" />
+       <uses-permission android:name="android.permission.WRITE_CONTACTS" />
 
 3) Now we have to write some Native code in Kotlin and then make a channel for communicate it with Flutter Code. So we'll have to do following Steps:
 
@@ -29,15 +29,15 @@
       package com.example.bloc
       import androidx.annotation.NonNull
 
-import android.content.ContentResolver
-import android.content.Context
-import android.provider.ContactsContract
-import io.flutter.embedding.engine.plugins.FlutterPlugin
-import io.flutter.plugin.common.MethodCall
-import io.flutter.plugin.common.MethodChannel
+      import android.content.ContentResolver
+      import android.content.Context
+      import android.provider.ContactsContract
+      import io.flutter.embedding.engine.plugins.FlutterPlugin
+      import io.flutter.plugin.common.MethodCall
+      import io.flutter.plugin.common.MethodChannel
 
-class ContactFetcher(private val context: Context) {
-    fun fetchContacts(result: MethodChannel.Result) {
+      class ContactFetcher(private val context: Context) {
+      fun fetchContacts(result: MethodChannel.Result) {
         val contactsList = mutableListOf<Map<String, String>>()
         val contentResolver: ContentResolver = context.contentResolver
         val cursor = contentResolver.query(
@@ -66,7 +66,7 @@ class ContactFetcher(private val context: Context) {
         result.success(contactsList)
     }
 
-private fun fetchContactPhoneNumber(contactId: String): String {
+      private fun fetchContactPhoneNumber(contactId: String): String {
         var phoneNumber = ""
         val contentResolver: ContentResolver = context.contentResolver
         val cursor = contentResolver.query(
@@ -77,7 +77,7 @@ private fun fetchContactPhoneNumber(contactId: String): String {
             null
         )
 
- cursor?.use { cursor ->
+       cursor?.use { cursor ->
             if (cursor.moveToFirst()) {
                 phoneNumber = cursor.getString(
                     cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)
